@@ -7,12 +7,22 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
+// 6.indexの作成で追記 --nameは getAllMessages、queryは FROM Messages AS だった
+@NamedQueries({
+    @NamedQuery(
+            name = "getAllTasks",
+            query = "SELECT m FROM Task AS m ORDER BY m.id DESC"
+            )
+})
+
 @Table(name = "tasks")// tasks -- messages
 
-public class Tasks {
+public class Task {
 
     // tasksテーブルの構造 -- messagesから title 削除
     @Id
