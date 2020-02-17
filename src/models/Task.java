@@ -12,7 +12,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.Table;
 
 @Entity
-// 6.indexの作成で追記 --nameは getAllMessages、queryは FROM Messages AS だった
+// 6.indexの作成で追記 --nameは getAllMessages、queryは m FROM Messages AS m だった
 @NamedQueries({
     @NamedQuery(
             name = "getAllTasks",
