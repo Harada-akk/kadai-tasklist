@@ -9,7 +9,7 @@
                     <tbody>
                         <tr>
                             <th>タスク</th>
-                            <td><c:out value="${task.content" /></td>
+                            <td><c:out value="${task.content}" /></td>
                         </tr>
                         <tr>
                             <th>作成日時</th>

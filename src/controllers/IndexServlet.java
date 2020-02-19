@@ -36,16 +36,28 @@ public class IndexServlet extends HttpServlet {
         // 6.indexの作成
         EntityManager em = DBUtil.createEntityManager();
 
-        //List<Messages> "getAllMessages", Messages.class だった
+        // 開くページ数を取得（デフォルトは1ページ目）
+        int page = 1;
+        try {
+            page = Integer.parseInt(request.getParameter("page"));
+        } catch(NumberFormatException e) {}
+
         List<Task> tasks = em.createNamedQuery("getAllTasks", Task.class)
+                .setFirstResult(15 * (page - 1))
+                .setMaxResults(15)
                 .getResultList();
-        // valueOf(messages.size()) だった
-        response.getWriter().append(Integer.valueOf(tasks.size()).toString());
+
+        // 全件数を取得
+        long tasks_count = (long)em.createNamedQuery("getTasksCount", Long.class)
+                   .getSingleResult();
+
 
         em.close();
 
         // 9.2 indexのビューを作成
         request.setAttribute("tasks", tasks);
+        request.setAttribute("tasks_count", tasks_count);     // 全件数
+        request.setAttribute("page", page);
 
         // フラッシュメッセージがセッションスコープにセットされていたら
         // リクエストスコープに保存する（セッションスコープからは削除）
