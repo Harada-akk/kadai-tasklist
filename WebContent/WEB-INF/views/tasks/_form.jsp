@@ -6,7 +6,6 @@
         <c:forEach var="error" items="${errors}">
             ・<c:out value="${error}" /><br />
         </c:forEach>
-
     </div>
 </c:if>
 <label for="content">タスク内容</label><br />
