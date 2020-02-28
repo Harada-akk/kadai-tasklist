@@ -32,38 +32,25 @@ public class EditServlet extends HttpServlet {
      * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
      */
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        // 12. edit（編集画面）の作成
         EntityManager em = DBUtil.createEntityManager();
 
-        //該当のIDのメッセージ１件のみをデータベースから取得
+        // 該当のIDのメッセージ1件のみをデータベースから取得
         Task t = em.find(Task.class, Integer.parseInt(request.getParameter("id")));
 
         em.close();
 
-        //メッセージ取得とセッションIDをリクエストスコープに登録
-        request.setAttribute("Task", t);
+        // メッセージ情報とセッションIDをリクエストスコープに登録
+        request.setAttribute("task", t);
         request.setAttribute("_token", request.getSession().getId());
-
 
         // メッセージデータが存在しているときのみ
         // メッセージIDをセッションスコープに登録
-        if(t != null){
-            request.getSession().setAttribute("Task", t);
-            request.setAttribute("_token", request.getSession().getId());
+        if(t != null) {
+            request.getSession().setAttribute("task_id", t.getId());
         }
-
-        // メッセージIDをセッションスコープに登録
-        request.getSession().setAttribute("task_id", t.getId());
-
-//        if(t != null){
-//        //メッセージIDをセッションスコープに登録
-//            request.getSession().setAttribute("task_id", t.getId());
-//        }
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/tasks/edit.jsp");
         rd.forward(request, response);
-
-
     }
 
 }

@@ -40,33 +40,6 @@ public class NewServlet extends HttpServlet {
 
         RequestDispatcher rd = request.getRequestDispatcher("/WEB-INF/views/tasks/new.jsp");
         rd.forward(request, response);
-
-
-        /*
-        // 8. new（新規登録） の作成
-        EntityManager em = DBUtil.createEntityManager();
-        em.getTransaction().begin();
-
-        // Taskのインスタンスを生成
-        Task t = new Task();
-
-        // t の各プロパティにデータを代入
-        String content = "sigoto";
-        t.setContent(content);
-
-        Timestamp currentTime = new Timestamp(System.currentTimeMillis());
-        t.setCreated_at(currentTime);
-        t.setUpdated_at(currentTime);
-
-        //データベースに保存
-        em.persist(t);
-        em.getTransaction().commit();
-
-        //自動採番されたIDの値を表示
-        response.getWriter().append(Integer.valueOf(t.getId()).toString());
-
-        em.close();
-        */
     }
 
 }
